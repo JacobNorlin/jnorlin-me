@@ -1,6 +1,8 @@
 "use strict";
 import React from 'react';
 import _ from 'lodash';
+import ProjectElem from './ProjectElem.jsx';
+import RepoElem from './RepoElement.jsx';
 
 export default class RepoList extends React.Component{
 	constructor(props){
@@ -9,13 +11,13 @@ export default class RepoList extends React.Component{
 	}
 
 	_createElement(data){
-		return <li key={data.link}>
-					<h2>{data.title}</h2>
-					<div className="elemContainer">
-						<a>{data.link}</a>
-						<p>{data.summary}</p>
-					</div>
-				</li>
+		//This feel dumb
+		if(data.type === "project"){
+			return <ProjectElem link={data.link} repo={data.repo} description={data.description} title={data.title} key={data.title} />
+		}
+		else if(data.type === "repo"){
+			return <RepoElem link={data.link} summary={data.summary} title={data.title} key={data.title} />
+		}
 	}
 
 	_createList(){
@@ -25,7 +27,6 @@ export default class RepoList extends React.Component{
 
 	render(){
 		let a = this._createList();
-		console.log(a);
 		return React.createElement('ul', {}, a);
 	}
 }
