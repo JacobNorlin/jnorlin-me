@@ -1,4 +1,6 @@
 import React from 'react';
+import RepoList from './components/RepoList.jsx';
+import {testData} from './data/testData.js';
 
 export default class App extends React.Component {
 	constructor(props){
@@ -26,6 +28,7 @@ export default class App extends React.Component {
 					<li>Plebrater</li>
 				</ul>
 			</div>
+			<RepoList elements={testData}/>
 			<div className="col-sm-6">
 				<div className="page-header">
 					<h2>experience</h2>
