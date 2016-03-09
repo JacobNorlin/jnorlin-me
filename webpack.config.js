@@ -1,6 +1,7 @@
    "use strict";
    var path = require('path');
-   var webpack = require('webpack')
+   var webpack = require('webpack');
+   var HtmlWebpackPlugin = require('html-webpack-plugin');
    module.exports = {
     entry: {
       app: ["webpack/hot/dev-server", "./src/entry.jsx"],
@@ -27,6 +28,9 @@
     plugins: [
     new webpack.ResolverPlugin(
       new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin(".bower.json", ["main"])
-      )
+      ),
+    new HtmlWebpackPlugin({
+      template: "index.html"
+    })
     ],
   };
