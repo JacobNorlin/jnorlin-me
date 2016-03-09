@@ -2,6 +2,10 @@
 	background-image: url("../images/stardust.png");
 }
 
+.experienceElem{
+	border: solid;
+}
+
 .header{
 	background-color: "#000000"
 }
