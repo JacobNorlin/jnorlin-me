@@ -2,6 +2,7 @@
 import React from 'react';
 import _ from 'lodash';
 import ProjectElem from './ProjectElem.jsx';
+import ExperienceElem from './ExperienceElem.jsx';
 import RepoElem from './RepoElement.jsx';
 
 export default class RepoList extends React.Component{
@@ -12,11 +13,15 @@ export default class RepoList extends React.Component{
 
 	_createElement(data){
 		//This feel dumb
-		if(data.type === "project"){
-			return <ProjectElem link={data.link} repo={data.repo} description={data.description} title={data.title} key={data.title} />
-		}
-		else if(data.type === "repo"){
-			return <RepoElem link={data.link} summary={data.summary} title={data.title} key={data.title} />
+		console.log(data.type);
+		switch(data.type){
+			case "project":
+				return <ProjectElem link={data.link} repo={data.repo} description={data.description} title={data.title} key={data.title} />
+			case "repo":
+				return <RepoElem link={data.link} summary={data.summary} title={data.title} key={data.title} />
+			case "experience":
+				return <ExperienceElem location={data.location} description={data.description} title={data.title} workPlace={data.workplace} timeRange={data.timeRange} key={data.workplace} />
+			
 		}
 	}
 
