@@ -24,7 +24,7 @@ export default class Personal extends React.Component{
 					<PageHeader className="subHeader">
 						experience
 					</PageHeader>
-					<RepoList elements={this.props.experience} />
+					<RepoList elements={this.props.route.experience} />
 				</Col>
 			</Row>
 			<Row>

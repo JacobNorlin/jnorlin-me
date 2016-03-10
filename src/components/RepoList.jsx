@@ -13,7 +13,6 @@ export default class RepoList extends React.Component{
 
 	_createElement(data){
 		//This feel dumb
-		console.log(data.type);
 		switch(data.type){
 			case "project":
 				return <ProjectElem link={data.link} repo={data.repo} description={data.description} title={data.title} key={data.title} />

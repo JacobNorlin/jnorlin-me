@@ -15,6 +15,9 @@ export default class ExperienceElem extends React.Component{
 		}
 	}
 
+	/**
+	"""""""""""""""""parse"""""""""""""""" date to jsx
+	*/
 	_parseTime(timerange){
 		let rows = _.map(timerange, (date) => {
 			return <div key={date}>
