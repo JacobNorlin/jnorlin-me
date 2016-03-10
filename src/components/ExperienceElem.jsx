@@ -1,6 +1,7 @@
 "use strict"
 import React from 'react';
 import _ from 'lodash';
+import {Col, Grid} from 'react-bootstrap'
 
 export default class ExperienceElem extends React.Component{
 	constructor(props){
@@ -26,8 +27,8 @@ export default class ExperienceElem extends React.Component{
 	}
 
 	render(){
-		return <div className="container experienceElem">
-					<div className="col-sm-4">
+		return <Grid>
+					<Col sm={4}>
 						<h3>{this.props.workPlace}</h3>
 						<em>{this.props.location}</em>
 						<div className="">
@@ -36,11 +37,11 @@ export default class ExperienceElem extends React.Component{
 						<div >
 							<p>{this.props.description}</p>
 						</div>
-					</div>
-					<div className="col-sm-offset-4">
+					</Col>
+					<Col smOffset={4}>
 							{this._parseTime(this.props.timeRange)}
-						</div>
+						</Col>
 
-				</div>
+				</Grid>
 	}
 }

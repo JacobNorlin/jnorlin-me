@@ -9,7 +9,7 @@ require('bootstrap-webpack');
 // require('img!./images/startdust.png')
 
 //css
-require('css!./css/main.css')
+require('./css/main2.css')
 
 let elem = document.getElementById("app");
 

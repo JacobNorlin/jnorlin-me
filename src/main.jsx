@@ -1,6 +1,9 @@
 import React from 'react';
 import RepoList from './components/RepoList.jsx';
 import {videos, projects, experience} from './data/testData.js';
+import {Row, Col, Glyphicon, Grid, PageHeader} from 'react-bootstrap';
+
+import githubIcon from './images/GitHub-Mark-32px.png';
 
 export default class App extends React.Component {
 	constructor(props){
@@ -12,34 +15,41 @@ export default class App extends React.Component {
 	}
 
 	render(){
-		return 	<div className="container-fluid">
-		<div className="page-header header">
-			<h1>JNR</h1>
-		</div>
-		<div className="row">
-			<div className="col-sm-6">
-				<div className="page-header">
-					<h2>projects</h2>
-				</div>
+		return 	<Grid>
+		<Row>
+			<PageHeader>
+				<Col sm={3}>
+				</Col>
+				<Col smOffset={9}>
+					<a href="mailto:jacob.norlinandersson@gmail.com"><Glyphicon glyph="envelope"/></a>
+					<a  href="http://github.com/JacobNorlin"><img src={githubIcon}/></a>
+				</Col>
+			</PageHeader>
+		</Row>
+		<Row>
+			<Col sm={6}>
+				<PageHeader>
+					<h2 className="subHeader">projects</h2>
+				</PageHeader>
 				<RepoList elements={projects} />
-			</div>
-			<div className="col-sm-6">
-				<div className="page-header">
-					<h2>experience</h2>
-				</div>
+			</Col>
+			<Col sm={6}>
+				<PageHeader>
+					<h2 className="subHeader">experience</h2>
+				</PageHeader>
 				<RepoList elements={experience} />
-			</div>
-		</div>
-		<div className="row">
-			<div className="col-sm-offset-6 col-sm-6">
-				<div className="page-header">
-					<h2>interests</h2>
-				</div>
+			</Col>
+		</Row>
+		<Row>
+			<Col sm={6} smOffset={6}>
+				<PageHeader>
+					<h2 className="subHeader">interests</h2>
+				</PageHeader>
 				<li>
 
 				</li>
-			</div>
-		</div>
-	</div>
+			</Col>
+		</Row>
+	</Grid>
 	}
 }

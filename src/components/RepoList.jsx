@@ -32,7 +32,7 @@ export default class RepoList extends React.Component{
 
 	render(){
 		let a = this._createList();
-		return React.createElement('ul', {}, a);
+		return <div> {a} </div>
 	}
 }
 RepoList.propTypes = {
