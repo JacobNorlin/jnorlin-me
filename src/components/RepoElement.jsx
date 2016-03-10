@@ -13,9 +13,8 @@ export default class ProjectElem extends React.Component{
 
 	render(){
 		return <div>
-					<h2 className="subHeader">{this.state.title}</h2>
+					<a href={this.state.link}><h2 className="subHeader">{this.state.title}</h2></a>
 					<div className="elemContainer">
-						<a>{this.state.link}</a>
 						<h4>Summary</h4>
 						<p>{this.state.summary}</p>
 					</div>

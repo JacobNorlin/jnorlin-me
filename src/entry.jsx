@@ -1,6 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './main.jsx';
+import {Router, Route, hashHistory, Redirect} from 'react-router';
+import Personal from './components/Personal.jsx';
+import Repo from './components/Repo.jsx';
+
+import {videos, projects, experience} from './data/testData.js';
 
 require('expose?$!expose?jQuery!jquery');
 require('bootstrap-webpack');
@@ -13,4 +18,14 @@ require('./css/main2.css')
 
 let elem = document.getElementById("app");
 
-ReactDOM.render(<App />, elem);
+let router = <Router history={hashHistory}>
+				<Redirect from="/" to="personal" />
+
+				<Route path="/" component={App}>
+					<Route path="personal" projects = {projects} experience={experience} interest={[]} component={Personal}/>
+					<Route path="repo" videos={videos} component={Repo} />
+				</Route>
+
+			</Router>
+
+ReactDOM.render(router, elem);
