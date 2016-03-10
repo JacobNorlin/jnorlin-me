@@ -18,7 +18,7 @@ export default class ExperienceElem extends React.Component{
 	_parseTime(timerange){
 		let rows = _.map(timerange, (date) => {
 			return <div key={date}>
-						<p className="date">{date}</p>
+						<em className="date">{date}</em>
 					</div>
 		});
 		return <div>
@@ -29,10 +29,10 @@ export default class ExperienceElem extends React.Component{
 	render(){
 		return <Grid>
 					<Col sm={4}>
-						<h3>{this.props.workPlace}</h3>
+						<h3 className="subHeader">{this.props.workPlace}</h3>
 						<em>{this.props.location}</em>
 						<div className="">
-							<h2>{this.props.title}</h2>
+							<h4 className="subHeader">{this.props.title}</h4>
 						</div>
 						<div >
 							<p>{this.props.description}</p>

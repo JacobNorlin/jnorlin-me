@@ -1,7 +1,7 @@
 import React from 'react';
 import RepoList from './components/RepoList.jsx';
 import {videos, projects, experience} from './data/testData.js';
-import {Row, Col, Glyphicon, Grid, PageHeader} from 'react-bootstrap';
+import {Row, Col, Glyphicon, Grid, PageHeader, Navbar, Nav, NavItem} from 'react-bootstrap';
 
 import githubIcon from './images/GitHub-Mark-32px.png';
 
@@ -27,23 +27,31 @@ export default class App extends React.Component {
 			</PageHeader>
 		</Row>
 		<Row>
+			<Navbar>
+				<Nav>
+					<NavItem eventKey={1} href="#">Home</NavItem>
+					<NavItem eventKey={2} href="#">Repo</NavItem>
+				</Nav>
+			</Navbar>
+		</Row>
+		<Row>
 			<Col sm={6}>
-				<PageHeader>
-					<h2 className="subHeader">projects</h2>
+				<PageHeader className="subHeader">
+					projects
 				</PageHeader>
 				<RepoList elements={projects} />
 			</Col>
 			<Col sm={6}>
-				<PageHeader>
-					<h2 className="subHeader">experience</h2>
+				<PageHeader className="subHeader">
+					experience
 				</PageHeader>
 				<RepoList elements={experience} />
 			</Col>
 		</Row>
 		<Row>
 			<Col sm={6} smOffset={6}>
-				<PageHeader>
-					<h2 className="subHeader">interests</h2>
+				<PageHeader className="subHeader">
+					interests
 				</PageHeader>
 				<li>
 
