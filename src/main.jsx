@@ -18,6 +18,7 @@ export default class App extends React.Component {
 		<Row>
 			<PageHeader>
 				<Col sm={3}>
+				:^)
 				</Col>
 				<Col smOffset={9}>
 					<a href="mailto:jacob.norlinandersson@gmail.com"><Glyphicon glyph="envelope"/></a>

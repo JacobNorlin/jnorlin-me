@@ -28,9 +28,9 @@ export default class Personal extends React.Component{
 				</Col>
 			</Row>
 			<Row>
-				<Col sm={6} smOffset={6}>
+				<Col sm={6}>
 					<PageHeader className="subHeader">
-						interests
+						skills and interests
 					</PageHeader>
 				</Col>
 			</Row>
