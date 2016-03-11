@@ -29,7 +29,7 @@ export default class App extends React.Component {
 		<Row>
 			<Navbar>
 				<Nav>
-					<NavItem eventKey={1} href="#/">Personal</NavItem>
+					<NavItem eventKey={1} href="#/personal">Personal</NavItem>
 					<NavItem eventKey={2} href="#/repo">Repo</NavItem>
 				</Nav>
 			</Navbar>
