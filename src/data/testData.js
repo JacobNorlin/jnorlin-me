@@ -2,7 +2,17 @@ var videos = [
 	{link: 'https://www.youtube.com/watch?v=Qg3XOfioapI',
 	title: "Kolmogorov Music",
 	summary: "About complexity of data and how that can be applied to music",
-	type:"repo"}
+	type:"repo"},
+	{link: "https://www.youtube.com/watch?v=7_m7JCLKmTY",
+	title:"BayesDB: Query the Probable Implications of Data",
+	summary: "About a database that instead of just returning a select number of rows of data instead returns the data and the confidence in that returned result. So you could ask: what type of satellite has a mass of 500kg? And the database will return a set of rows with the most probable satellites that satisfy the question.",
+	type: "repo"},
+	{
+		link: "https://www.youtube.com/watch?v=uEFrE6cgVNY",
+		title: "Evidence-Oriented Programming",
+		summary: "Why do programming languages write the way they do? What is the data that writing for(int i ..) is the best way of writing a loop? Argues that that programming languages should be designed based on studies of what is most efficient. Also talks a bit about blind people programming, and how that is really hard because languages don't really support that.",
+		type: "repo"
+	}
 ]
 
 var projects = [

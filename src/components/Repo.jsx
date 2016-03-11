@@ -14,6 +14,12 @@ export default class Personal extends React.Component{
 		return <Row>
 			<Col sm={6}>
 				<PageHeader className="subHeader">
+					Repo
+				</PageHeader>
+				<p>
+				A repository of videos and shit I found interesing. Will compile stuff I watch here and try to summarize what I saw in an attempt to actually learn or remember something.
+				</p>
+				<PageHeader className="subHeader">
 					videos
 				</PageHeader>
 				<RepoList elements={this.props.route.videos} />

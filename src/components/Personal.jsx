@@ -32,6 +32,13 @@ export default class Personal extends React.Component{
 					<PageHeader className="subHeader">
 						skills and interests
 					</PageHeader>
+					<ul>
+						<li>Javascript/node</li>
+						<li>C#</li>
+						<li>Java</li>
+						<li>Scala</li>
+						<li>Language engineering</li>
+					</ul>
 				</Col>
 			</Row>
 		</Row>
