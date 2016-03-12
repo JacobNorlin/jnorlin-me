@@ -5,7 +5,7 @@ import {Router, Route, hashHistory, Redirect} from 'react-router';
 import Personal from './components/Personal.jsx';
 import Repo from './components/Repo.jsx';
 
-import {videos, projects, experience} from './data/testData.js';
+import {videos, projects, experience, texts} from './data/testData.js';
 
 require('expose?$!expose?jQuery!jquery');
 require('bootstrap-webpack');
@@ -23,7 +23,7 @@ let router = <Router history={hashHistory}>
 
 				<Route path="/" component={App}>
 					<Route path="personal" projects = {projects} experience={experience} interest={[]} component={Personal}/>
-					<Route path="repo" videos={videos} component={Repo} />
+					<Route path="repo" videos={videos} texts={texts} component={Repo} />
 				</Route>
 
 			</Router>

@@ -1,3 +1,8 @@
+/**
+I REALLY need to come up with some more intelligent way of storing this data.
+*/
+
+
 var videos = [
 	{link: 'https://www.youtube.com/watch?v=Qg3XOfioapI',
 	title: "Kolmogorov Music",
@@ -17,6 +22,15 @@ var videos = [
 		link: "https://www.youtube.com/watch?v=JMP6gI5mLHc",
 		title: "Category theory, the essence of interface-based design",
 		summary: "The basics of category theory and how it relates to programming language design. Derives method reference in java from category theory. I don't fully understand the material, but it was interesting to watch. I need to rewatch it",
+		type: "repo"
+	}
+]
+
+var texts = [
+	{
+		link: "https://gist.github.com/staltz/868e7e9bc2a7b8c1f754",
+		title: "The introduction to Reactive Programming you've been missing",
+		summary: "Really good introduction to rxjs and reactive programming in general.",
 		type: "repo"
 	}
 ]
@@ -56,7 +70,7 @@ var experience = [
 	type: "experience"
 	}
 ]
-export {videos, projects, experience};
+export {videos, projects, experience, texts};
 
 
 
