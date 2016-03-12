@@ -12,6 +12,12 @@ var videos = [
 		title: "Evidence-Oriented Programming",
 		summary: "Why do programming languages write the way they do? What is the data that writing for(int i ..) is the best way of writing a loop? Argues that that programming languages should be designed based on studies of what is most efficient. Also talks a bit about blind people programming, and how that is really hard because languages don't really support that.",
 		type: "repo"
+	},
+	{
+		link: "https://www.youtube.com/watch?v=JMP6gI5mLHc",
+		title: "Category theory, the essence of interface-based design",
+		summary: "The basics of category theory and how it relates to programming language design. Derives method reference in java from category theory. I don't fully understand the material, but it was interesting to watch. I need to rewatch it",
+		type: "repo"
 	}
 ]
 
