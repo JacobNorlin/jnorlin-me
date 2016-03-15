@@ -8,8 +8,8 @@ export default class NumberGenerator{
 		this.pauser = new Rx.Subject();
 	}
 
-	getPrimeLastDigitDistributionStream(rate){
-		return this.getPrimeStream(rate)
+	getPrimeLastDigitDistributionStream(rate, start){
+		return this.getPrimeStream(rate, start)
 			.map(x => {
 				return x % 10;
 			})
@@ -19,14 +19,14 @@ export default class NumberGenerator{
 			}, new Array(10).fill(0));
 	}
 
-	getPrimeStream(rate){
+	getPrimeStream(rate, start){
 		return Rx.Observable
 			.interval(rate)
 			.map((x) => {
-				return x
+				return x+parseInt(start);
 			})
 			.filter(isPrime)
-			.pausable(this.pauser);
+			.pausable(this.pauser);;
 	}
 
 	pauseStream(){
