@@ -2,6 +2,7 @@
 import React from 'react'
 import {Grid, Row, Col, PageHeader} from 'react-bootstrap';
 import RepoList from './RepoList.jsx';
+import NumberDistribution from './NumberDistribution.jsx';
 
 
 export default class Personal extends React.Component{
