@@ -3,17 +3,13 @@
 import Rx from 'rx';
 import isPrime from 'is-number-prime';
 
-export default function primeObservable(rate){
+export default class NumberGenerator{
+	constructor(){
+		this.pauser = new Rx.Subject();
+	}
 
-		 // let initialDistribution = [{label:"lol", values:[{x:"0", y:0}, {x:"1", y:0}, {x:"2", y:0}, {x:"3", y:0} , {x:"4", y:0}, {x:"5", y:0}, {x:"6", y:0}, {x:"7", y:0}, {x:"8", y:0}, {x:"9", y:0}]}],
-
-
-		return Rx.Observable
-			.interval(rate)
-			.map((x) => {
-				return x
-			})
-			.filter(isPrime)
+	getPrimeLastDigitDistributionStream(rate){
+		return this.getPrimeStream(rate)
 			.map(x => {
 				return x % 10;
 			})
@@ -21,6 +17,25 @@ export default function primeObservable(rate){
 				acc[p]+=1;
 				return acc;
 			}, new Array(10).fill(0));
-	
+	}
+
+	getPrimeStream(rate){
+		return Rx.Observable
+			.interval(rate)
+			.map((x) => {
+				return x
+			})
+			.filter(isPrime)
+			.pausable(this.pauser);
+	}
+
+	pauseStream(){
+		this.pauser.onNext(false);
+	}
+
+	startStream(){
+		this.pauser.onNext(true);
+	}
 }
+
 
