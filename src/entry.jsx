@@ -20,7 +20,7 @@ require('./css/main2.css')
 let elem = document.getElementById("app");
 
 let router = <Router history={hashHistory}>
-				<Redirect from="/" to="repo" />
+				<Redirect from="/" to="personal" />
 
 				<Route path="/" component={App}>
 					<Route path="personal" projects = {projects} experience={experience} interest={[]} component={Personal}/>
