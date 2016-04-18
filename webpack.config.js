@@ -4,7 +4,7 @@
    var HtmlWebpackPlugin = require('html-webpack-plugin');
    module.exports = {
     entry: {
-      app: "./src/entry.jsx",
+      app: "./src/index.jsx",
     },
     output: {
       path: path.resolve(__dirname, "build"),
@@ -19,7 +19,8 @@
       { test: /\.(woff|woff2)$/, loader:"url?prefix=font/&limit=5000" },
       { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream" },
       { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml" },
-      { test: /\.(jpe?g|png|gif|svg)$/i, loader: 'url?limit=10000!img?progressive=true' }
+      { test: /\.(jpe?g|png|gif|svg)$/i, loader: 'url?limit=10000!img?progressive=true' },
+      { test: require.resolve("react"), loader: "expose?React"}
       ],
     },
     resolve: {

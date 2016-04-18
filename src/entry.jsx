@@ -4,7 +4,7 @@ import App from './main.jsx';
 import {Router, Route, hashHistory, Redirect} from 'react-router';
 import Personal from './components/Personal.jsx';
 import Repo from './components/Repo.jsx';
-import NumberDistribution from './components/NumberDistribution.jsx';
+import Blog from './components/Blog.jsx';
 
 import {videos, projects, experience, texts} from './data/testData.js';
 
@@ -26,6 +26,7 @@ let router = <Router history={hashHistory}>
 					<Route path="personal" projects = {projects} experience={experience} interest={[]} component={Personal}/>
 					<Route path="repo" videos={videos} texts={texts} component={Repo} />
 					<Route path="primes" component={NumberDistribution} />
+					<Route path="blog" component={Blog} />
 				</Route>
 
 			</Router>
