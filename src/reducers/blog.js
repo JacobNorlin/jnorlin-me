@@ -1,6 +1,6 @@
 "use strict"
 
-import {BLOG_FETCH_REQUEST, BLOG_FETCH_SUCCESS, BLOG_FETCH_FAILURE, BLOG_POST_REQUEST, BLOG_POST_SUCCESS, BLOG_POST_FAILURE} from '../actions/blog.js'
+import {BLOG_FETCH_REQUEST, BLOG_FETCH_SUCCESS, BLOG_FETCH_FAILURE, BLOG_POST_REQUEST, BLOG_POST_SUCCESS, BLOG_POST_FAILURE, BLOG_WRITE_UPDATE} from '../actions/blog.js'
 
 export function blogPosts(state = {
     isFetching: false,
@@ -55,6 +55,19 @@ export function addBlogPost(state = {
         {
             return Object.assign({}, state, {
                 isFetching: false
+            })
+        }
+        default:
+            return state
+    }
+}
+
+export function updateBlogPreview(state = {}, action) {
+    switch (action.type) {
+        case BLOG_WRITE_UPDATE:
+        {
+            return Object.assign({}, state, {
+                post: action.post
             })
         }
         default:

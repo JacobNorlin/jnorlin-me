@@ -32,3 +32,13 @@ export function addBlogPost(post){
         },
     }
 }
+
+export const BLOG_WRITE_UPDATE = 'BLOG_WRITE_UPDATE'
+
+export function updateBlogPreviewContent(post){
+    return {
+        post: post,
+        type: BLOG_WRITE_UPDATE
+
+    }
+}
