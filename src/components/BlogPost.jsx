@@ -1,23 +1,25 @@
-import React from 'react';
+import {Component, PropTypes} from 'react'
 import {Row, Col, Glyphicon, Grid, PageHeader, Navbar, NavItem, Nav} from 'react-bootstrap';
 
 
-export default class BlogPost extends React.Component{
-	constructor(props){
-		super(props);
-	}
-
+export default class BlogPost extends Component{
 	render(){
-		<Grid>
+		const {body, createdAt} = this.props
+		return (<Grid>
 			<PageHeader>
 				//Title
 			</PageHeader>
 			<Row>
-				//Date
+				{createdAt}
 			</Row>
 			<Row>
-				//Post
+				{body}
 			</Row>
-		</Grid>
+		</Grid>)	
 	}
+}
+
+BlogPost.propTypes = {
+	createdAt: PropTypes.string.isRequired,
+	body: PropTypes.string.isRequired
 }

@@ -8,16 +8,12 @@ import githubIcon from './images/GitHub-Mark-32px.png';
 
 class App extends Component {
 
-	constructor(props){
-		super(props)
-	}
-
 	componentWillMount(){
 
 	}
 
 	render(){
-		const { dispatch, quote, isAuthenticated, errorMessage } = this.props
+		const { dispatch, isAuthenticated, errorMessage } = this.props
 		return 	<Grid>
 		<Row>
 			<PageHeader>
@@ -31,13 +27,12 @@ class App extends Component {
 			</PageHeader>
 		</Row>
 		<Row>
-		<b>kek {isAuthenticated}</b>
-			<Col sm={11}>
+			<Col sm={11}>	
 				<Navbar>
 					<Nav>
 						<NavItem eventKey={1} href="/">Personal</NavItem>
-						<NavItem eventKey={2} href="/repo">Repo</NavItem>
-						<NavItem eventKey={4} href="/blog">Blog</NavItem>
+						<NavItem eventKey={2} href="#/repo">Repo</NavItem>
+						<NavItem eventKey={4} href="#/blog">Blog</NavItem>
 					</Nav>
 				</Navbar>
 			</Col>
@@ -56,16 +51,11 @@ App.propTypes = {
   errorMessage: PropTypes.string,
 }
 
-// These props come from the application's
-// state when it is started
 function mapStateToProps(state) {
-
-  const { quotes, auth } = state
-  const { quote, authenticated } = quotes
+  const { auth } = state
   const { isAuthenticated, errorMessage } = auth
 
   return {
-    quote,
     isAuthenticated,
     errorMessage
   }

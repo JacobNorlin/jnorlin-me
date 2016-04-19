@@ -20,7 +20,7 @@ function receiveLogin(user){
 		type: LOGIN_SUCCESS,
 		isFetching: false,
 		isAuthenticated: true,
-		id_token: user.id_token
+		user: user
 	}
 }
 
@@ -44,14 +44,14 @@ export function loginUser(creds) {
 	return dispatch => {
 		dispatch(requestLogin(creds))
 
-		return  fetch(cfg.BASE_URL+"/sessions/create", config)
+		return  fetch(cfg.BASE_URL+"sessions/create", config)
 			.then(res => {
 				res.json().then(user => {
 					if(!res.ok){
 						dispatch(loginError(user.message))
 						return Promise.reject(user)
 					}else{
-						localStorage.setItem('id_token', user.id_token)
+						localStorage.setItem('user', JSON.stringify(user))
 						dispatch(receiveLogin(user))
 					}
 				})
@@ -83,7 +83,7 @@ function receiveLogout() {
 export function logoutUser() {
   return dispatch => {
     dispatch(requestLogout())
-    localStorage.removeItem('id_token')
+    localStorage.removeItem('user')
     dispatch(receiveLogout())
   } 
 }

@@ -4,13 +4,13 @@ import cfg from '../config/apicfg.js'
 
 function callApi(endpoint, authenticated) {
 
-	let token = localStorage.getItem('id_token') || null
+	let user = JSON.parse(localStorage.getItem('user')) || null
 	let config = {}
-
 	if(authenticated) {
 		if(token){
 			config = {
-				headers: { 'Authorization': 'Bearer ${token}}'}
+				headers: { 'Authorization': `Bearer ${user.id_token}`},
+				body: JSON.stringify(user)
 			}
 		}else{
 			throw "No token!"
@@ -18,14 +18,15 @@ function callApi(endpoint, authenticated) {
 	}
 
 	return fetch(cfg.BASE_URL + endpoint, config)
-		.then(response => {
-			response.text().then(text => {
-				if(!response.ok){
-					return Promise.reject(text)
-				}
-				return text
-			}).catch(err => console.log(err))
-		})
+	.then(response => 
+		response.text().then(text => ({ text, response }))
+		).then(({ text, response }) => {
+			if (!response.ok) {
+				return Promise.reject(text)
+			}
+
+			return text
+		}).catch(err => console.log(err))
 }
 
 export const CALL_API = Symbol('Call API')

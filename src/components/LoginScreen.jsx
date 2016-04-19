@@ -5,7 +5,6 @@ import {connect} from 'react-redux'
 class LoginScreen extends Component{
 	render() {
 		const { errorMessage, isAuthenticated } = this.props
-		console.log(isAuthenticated)
 		return !isAuthenticated ? (
 			<Grid>
 			<Row>
