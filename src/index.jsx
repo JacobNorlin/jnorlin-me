@@ -6,6 +6,7 @@ import {Router, Route, IndexRoute, hashHistory} from 'react-router';
 import Personal from './components/Personal.jsx';
 import Repo from './components/Repo.jsx';
 import Blog from './components/Blog.jsx';
+import NewBlogPost from './components/NewBlogPost.jsx'
 import thunkMiddleware from 'redux-thunk'
 import blogApp from './reducers/index.js'
 import {Provider} from 'react-redux'
@@ -27,8 +28,9 @@ render(
 				<IndexRoute component={Personal}/>
 				<Route path="repo" component={Repo}/>
 				<Route path="blog" component={Blog}/>
+				<Route path="blog/new" component={NewBlogPost}/>
 			</Route>
 		</Router>
 	</Provider>,
 	rootElement
-	)
+)

@@ -10,7 +10,7 @@ export default class BlogPost extends Component{
 				//Title
 			</PageHeader>
 			<Row>
-				{createdAt}
+				{new Date(createdAt).toString()}
 			</Row>
 			<Row>
 				{body}

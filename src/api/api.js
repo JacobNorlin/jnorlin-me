@@ -2,21 +2,25 @@
 
 import cfg from '../config/apicfg.js'
 
-function callApi(endpoint, authenticated) {
+function callApi(endpoint, authenticated, type, post) {
 
 	let user = JSON.parse(localStorage.getItem('user')) || null
+	let body = {user, post}
 	let config = {}
 	if(authenticated) {
-		if(token){
+		if(user.id_token){
 			config = {
-				headers: { 'Authorization': `Bearer ${user.id_token}`},
-				body: JSON.stringify(user)
+				headers: { 'Authorization': `Bearer ${user.id_token}`,
+					'Content-Type': 'application/x-www-form-urlencoded'},
+				body: `user=${JSON.stringify(user)}&post=${JSON.stringify(post)}`,
+				method: type,
+				mode: 'cors'
 			}
 		}else{
 			throw "No token!"
 		}
 	}
-
+	console.log(config)
 	return fetch(cfg.BASE_URL + endpoint, config)
 	.then(response => 
 		response.text().then(text => ({ text, response }))
@@ -38,11 +42,11 @@ export default store => next => action => {
 		return next(action)
 	}
 
-	let {endpoint, types, authenticated} = callAPI
+	let {endpoint, types, authenticated, type, post} = callAPI
 
 	const [requestType, successType, errorType] = types
 
-	return callApi(endpoint, authenticated).then(
+	return callApi(endpoint, authenticated, type, post).then(
 		response => 
 			next({
 				response,
