@@ -29,7 +29,7 @@ export function addBlogPost(post){
             authenticated: true,
             types: [BLOG_POST_REQUEST, BLOG_POST_SUCCESS, BLOG_POST_FAILURE],
             method: 'POST',
-            post: post
+            data: post
 
         },
     }
@@ -49,7 +49,7 @@ export function removeBlogPost(post){
             authenticated: true,
             types: [BLOG_POST_REQUEST, BLOG_POST_REMOVE, BLOG_POST_FAILURE],
             method: 'POST',
-            post: post
+            data: post
         }
     }
 }
