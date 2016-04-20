@@ -13,6 +13,7 @@ import {Provider} from 'react-redux'
 import api from './api/api.js'
 
 require('bootstrap-webpack')
+require('./css/main2.css')
 
 
 let createStoreWithMiddleware = applyMiddleware(thunkMiddleware, api)(createStore)

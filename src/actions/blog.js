@@ -20,6 +20,7 @@ export const BLOG_POST_REQUEST = 'BLOG_POST_REQUEST'
 export const BLOG_POST_SUCCESS = 'BLOG_POST_SUCCESS'
 export const BLOG_POST_FAILURE = 'BLOG_POST_FAILURE'
 export const BLOG_POST_UPDATE = 'BLOG_POST_UPDATE'
+export const BLOG_POST_REMOVE = 'BLOG_POST_REMOVE'
 
 export function addBlogPost(post){
     return {
@@ -27,7 +28,7 @@ export function addBlogPost(post){
             endpoint: 'blog/protected/addPost',
             authenticated: true,
             types: [BLOG_POST_REQUEST, BLOG_POST_SUCCESS, BLOG_POST_FAILURE],
-            type: 'POST',
+            method: 'POST',
             post: post
 
         },
@@ -38,6 +39,17 @@ export function updateBlogPreviewContent(post){
     return {
         post: post,
         type: BLOG_POST_UPDATE
+    }
+}
 
+export function removeBlogPost(post){
+    return {
+        [CALL_API]: {
+            endpoint: 'blog/protected/removePost',
+            authenticated: true,
+            types: [BLOG_POST_REQUEST, BLOG_POST_REMOVE, BLOG_POST_FAILURE],
+            method: 'POST',
+            post: post
+        }
     }
 }

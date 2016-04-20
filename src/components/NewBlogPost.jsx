@@ -22,7 +22,7 @@ class NewBlogPost extends Component {
                 </PageHeader>
                 <form className="form-inline" role="form">
                     <div className="form-group">
-                        <textarea tows={100} cols={100} ref="blogpost" onChange={(event) => this.handleOnChange(event)} defaultValue={body}/>
+                        <textarea rows={25} cols={100} ref="blogpost" onChange={(event) => this.handleOnChange(event)} defaultValue={body}/>
                     </div>
                 </form>
                 <Button type="submit" href="#/blog" onClick={(event) => {this.handleSubmit(event)}}>Submit</Button>
@@ -58,9 +58,10 @@ NewBlogPost.propTypes = {
 }
 
 function mapStateToProps(state) {
-    const {auth, addBlogPost} = state
+    console.log(state)
+    const {auth, blogApiCall} = state
     const {isAuthenticated} = auth
-    const {post} = addBlogPost
+    const {post} = blogApiCall
 
     return {
         isAuthenticated,

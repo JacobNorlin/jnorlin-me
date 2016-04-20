@@ -1,6 +1,6 @@
 "use strict"
 
 import auth from './auth.js'
-import {blogPosts, addBlogPost, updateBlogPreview} from './blog.js'
+import {blogApiCall} from './blog.js'
 import {combineReducers} from 'redux'
-export default combineReducers({auth, blogPosts, addBlogPost, updateBlogPreview})
+export default combineReducers({auth, blogApiCall})

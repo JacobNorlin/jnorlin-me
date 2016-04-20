@@ -1,11 +1,14 @@
 "use strict"
 
-import {BLOG_FETCH_REQUEST, BLOG_FETCH_SUCCESS, BLOG_FETCH_FAILURE, BLOG_POST_REQUEST, BLOG_POST_SUCCESS, BLOG_POST_FAILURE, BLOG_POST_UPDATE} from '../actions/blog.js'
+import {BLOG_FETCH_REQUEST, BLOG_FETCH_SUCCESS, BLOG_FETCH_FAILURE, BLOG_POST_REMOVE, BLOG_POST_REQUEST, BLOG_POST_SUCCESS, BLOG_POST_FAILURE, BLOG_POST_UPDATE} from '../actions/blog.js'
 
-export function blogPosts(state = {
+
+export function blogApiCall(state = {
     isFetching: false,
-    posts: "[]",
-    authenticated: false
+    isPosting: false,
+    authenticated: true,
+    post: {body: " ", id: -1},
+    posts: "[]"
 }, action) {
     switch (action.type) {
         case BLOG_FETCH_REQUEST:
@@ -28,40 +31,35 @@ export function blogPosts(state = {
                 isFetching: false
             })
         }
-        default:
-            return state
-    }
-}
-
-export function addBlogPost(state = {
-    isFetching: false,
-    authenticated: true,
-    post: {body:" ", id:-1}
-}, action) {
-    switch (action.type) {
         case BLOG_POST_REQUEST:
         {
             return Object.assign({}, state, {
-                isFetching: true
+                isPosting: true
             })
         }
         case BLOG_POST_SUCCESS:
         {
             return Object.assign({}, state, {
-                isFetching: false
+                isPosting: false
             })
         }
         case BLOG_POST_FAILURE:
         {
             return Object.assign({}, state, {
-                isFetching: false
+                isPosting: false
             })
         }
         case BLOG_POST_UPDATE:
         {
             return Object.assign({}, state, {
-                isFetching: false,
+                isPosting: false,
                 post: action.post
+            })
+        }
+        case BLOG_POST_REMOVE:
+        {
+            return Object.assign({}, state, {
+                isPosting: false
             })
         }
         default:

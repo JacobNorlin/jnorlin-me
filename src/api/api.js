@@ -2,10 +2,9 @@
 
 import cfg from '../config/apicfg.js'
 
-function callApi(endpoint, authenticated, type, post) {
+function callApi(endpoint, authenticated, method, post) {
 
 	let user = JSON.parse(localStorage.getItem('user')) || null
-	console.log(post)
 	let config = {}
 	if(authenticated) {
 		if(user.id_token){
@@ -13,7 +12,7 @@ function callApi(endpoint, authenticated, type, post) {
 				headers: { 'Authorization': `Bearer ${user.id_token}`,
 					'Content-Type': 'application/x-www-form-urlencoded'},
 				body: `user=${JSON.stringify(user)}&post=${JSON.stringify(post)}`,
-				method: type,
+				method: method,
 				mode: 'cors'
 			}
 		}else{
@@ -41,11 +40,11 @@ export default store => next => action => {
 		return next(action)
 	}
 
-	let {endpoint, types, authenticated, type, post} = callAPI
+	let {endpoint, types, authenticated, method, post} = callAPI
 
 	const [requestType, successType, errorType] = types
 
-	return callApi(endpoint, authenticated, type, post).then(
+	return callApi(endpoint, authenticated, method, post).then(
 		response => 
 			next({
 				response,

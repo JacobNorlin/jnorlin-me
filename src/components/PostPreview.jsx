@@ -25,8 +25,8 @@ PostPreview.propTypes = {
 }
 
 function mapStateToProps(state){
-    const {addBlogPost} = state
-    const {post} = addBlogPost
+    const {blogApiCall} = state
+    const {post} = blogApiCall
     return {post}
 }
 
