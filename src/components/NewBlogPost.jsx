@@ -6,54 +6,65 @@ import {connect} from 'react-redux'
 import {Grid, Row, Col, Button, PageHeader} from 'react-bootstrap'
 import {addBlogPost, updateBlogPreviewContent} from '../actions/blog.js'
 import PostPreview from './PostPreview.jsx'
+import Textarea from 'react-textarea-autosize'
 
 class NewBlogPost extends Component {
 
 
     render() {
-        const {isAuthenticated} = this.props
-
+        const {isAuthenticated, post} = this.props
+        const {body, id} = post
         return isAuthenticated && <Grid>
+                <PageHeader>Preview</PageHeader>
                 <PostPreview/>
-            <PageHeader>
+                <PageHeader>
                     New Post
-            </PageHeader>
-            <form className="form-inline" role="form">
-                <div className="form-group">
-                    <textarea minWidth="100%" className="form-control" ref="blogpost" placeholder="Field 1" onChange={(event) => this.handleOnChange(event)}/>
-                </div>
-            </form>
-            <Button type="submit" onClick={(event) => {this.handleSubmit(event)}}>Submit</Button>
-        </Grid>
+                </PageHeader>
+                <form className="form-inline" role="form">
+                    <div className="form-group">
+                        <textarea tows={100} cols={100} ref="blogpost" onChange={(event) => this.handleOnChange(event)} defaultValue={body}/>
+                    </div>
+                </form>
+                <Button type="submit" href="#/blog" onClick={(event) => {this.handleSubmit(event)}}>Submit</Button>
+                <Button type="submit" href="#/blog">Back</Button>
+            </Grid>
 
     }
 
-    handleSubmit(event) {
+    componentWillUnmount() {
         const {dispatch} = this.props
-        const body = this.refs.blogpost.value.trim()
+        dispatch(updateBlogPreviewContent({body:"", id:-1}))
+    }
 
-        dispatch(addBlogPost(body))
+
+    handleSubmit(event) {
+        const {dispatch, post} = this.props
+        const body = this.refs.blogpost.value.trim()
+        dispatch(addBlogPost(post))
     }
 
     handleOnChange(event) {
         const body = this.refs.blogpost.value.trim()
-        const {dispatch} = this.props
-        dispatch(updateBlogPreviewContent(body))
+        const {dispatch, post} = this.props
+        dispatch(updateBlogPreviewContent({body, id: post.id}))
 
     }
 }
 
 NewBlogPost.propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    post: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {
-    const {auth} = state
+    const {auth, addBlogPost} = state
     const {isAuthenticated} = auth
+    const {post} = addBlogPost
 
     return {
-        isAuthenticated
+        isAuthenticated,
+        post
     }
 }
 

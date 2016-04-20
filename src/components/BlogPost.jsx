@@ -4,19 +4,27 @@ import ReactMarkdown from 'react-markdown'
 
 export default class BlogPost extends Component{
 	render(){
-		const {body, createdAt} = this.props
+		const {post, onEditClick, isAuthenticated} = this.props
+		const {body, createdAt, id} = post
 		return (<Grid>
+			<PageHeader>
+				Post {this.formateDate(new Date(createdAt))}
+			</PageHeader>
 			<Row>
-				{new Date(createdAt).toString()}
-			</Row>
-			<Row>
+				{isAuthenticated && <a href="#/blog/new" onClick={onEditClick}>Edit post</a>}
 				<ReactMarkdown source={body}/>
 			</Row>
 		</Grid>)	
 	}
+
+	formateDate(date){
+		return date.getYear()+"-"+date.getMonth()+"-"+date.getDay()
+	}
 }
 
+
 BlogPost.propTypes = {
-	createdAt: PropTypes.string.isRequired,
-	body: PropTypes.string.isRequired
+	post: PropTypes.object.isRequired,
+	isAuthenticated: PropTypes.bool.isRequired,
+	onEditClick: PropTypes.func.isRequired
 }

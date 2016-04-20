@@ -3,29 +3,30 @@ import {connect} from 'react-redux'
 import {Grid} from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown'
 
-class PostPreview{
+class PostPreview extends Component{
 
 
     render(){
         const {post} = this.props
+        const {body, id} = post
         console.log(post)
         return (
             <Grid>
-                <ReactMarkdown source={post}/>
+                <ReactMarkdown source={body}/>
             </Grid>
         )
     }
 
+
 }
 
 PostPreview.propTypes = {
-    post: PropTypes.string.isRequired
+    post: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state){
-    console.log(state)
-    const {updateBlogPreview} = state
-    const {post} = updateBlogPreview
+    const {addBlogPost} = state
+    const {post} = addBlogPost
     return {post}
 }
 

@@ -19,6 +19,7 @@ export function fetchPosts(user) {
 export const BLOG_POST_REQUEST = 'BLOG_POST_REQUEST'
 export const BLOG_POST_SUCCESS = 'BLOG_POST_SUCCESS'
 export const BLOG_POST_FAILURE = 'BLOG_POST_FAILURE'
+export const BLOG_POST_UPDATE = 'BLOG_POST_UPDATE'
 
 export function addBlogPost(post){
     return {
@@ -33,12 +34,10 @@ export function addBlogPost(post){
     }
 }
 
-export const BLOG_WRITE_UPDATE = 'BLOG_WRITE_UPDATE'
-
 export function updateBlogPreviewContent(post){
     return {
         post: post,
-        type: BLOG_WRITE_UPDATE
+        type: BLOG_POST_UPDATE
 
     }
 }

@@ -1,10 +1,10 @@
 "use strict"
 
-import {BLOG_FETCH_REQUEST, BLOG_FETCH_SUCCESS, BLOG_FETCH_FAILURE, BLOG_POST_REQUEST, BLOG_POST_SUCCESS, BLOG_POST_FAILURE, BLOG_WRITE_UPDATE} from '../actions/blog.js'
+import {BLOG_FETCH_REQUEST, BLOG_FETCH_SUCCESS, BLOG_FETCH_FAILURE, BLOG_POST_REQUEST, BLOG_POST_SUCCESS, BLOG_POST_FAILURE, BLOG_POST_UPDATE} from '../actions/blog.js'
 
 export function blogPosts(state = {
     isFetching: false,
-    posts: [],
+    posts: "[]",
     authenticated: false
 }, action) {
     switch (action.type) {
@@ -16,10 +16,9 @@ export function blogPosts(state = {
         }
         case BLOG_FETCH_SUCCESS:
         {
-            let posts = JSON.parse(action.response)
             return Object.assign({}, state, {
                 isFetching: false,
-                posts: posts,
+                posts: action.response,
                 authenticated: action.authenticated || false
             })
         }
@@ -36,7 +35,8 @@ export function blogPosts(state = {
 
 export function addBlogPost(state = {
     isFetching: false,
-    authenticated: true
+    authenticated: true,
+    post: {body:" ", id:-1}
 }, action) {
     switch (action.type) {
         case BLOG_POST_REQUEST:
@@ -57,16 +57,10 @@ export function addBlogPost(state = {
                 isFetching: false
             })
         }
-        default:
-            return state
-    }
-}
-
-export function updateBlogPreview(state = {}, action) {
-    switch (action.type) {
-        case BLOG_WRITE_UPDATE:
+        case BLOG_POST_UPDATE:
         {
             return Object.assign({}, state, {
+                isFetching: false,
                 post: action.post
             })
         }

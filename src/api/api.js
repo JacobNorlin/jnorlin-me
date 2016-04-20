@@ -5,7 +5,7 @@ import cfg from '../config/apicfg.js'
 function callApi(endpoint, authenticated, type, post) {
 
 	let user = JSON.parse(localStorage.getItem('user')) || null
-	let body = {user, post}
+	console.log(post)
 	let config = {}
 	if(authenticated) {
 		if(user.id_token){
@@ -20,7 +20,6 @@ function callApi(endpoint, authenticated, type, post) {
 			throw "No token!"
 		}
 	}
-	console.log(config)
 	return fetch(cfg.BASE_URL + endpoint, config)
 	.then(response => 
 		response.text().then(text => ({ text, response }))

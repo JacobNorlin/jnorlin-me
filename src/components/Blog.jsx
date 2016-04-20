@@ -5,7 +5,7 @@ import {Link} from 'react-router'
 import {Row, Col, Glyphicon, Grid, PageHeader, Navbar, NavItem, Nav, Button} from 'react-bootstrap'
 import LoginButton from './LoginButton.jsx'
 import PostCalendar from './PostCalendar.jsx'
-import {fetchPosts} from '../actions/blog.js'
+import {fetchPosts, updateBlogPreviewContent} from '../actions/blog.js'
 import BlogPost from './BlogPost.jsx'
 
 class Blog extends Component {
@@ -17,13 +17,14 @@ class Blog extends Component {
     }
 
     render() {
-        const {isAuthenticated, posts} = this.props
-
+        let {isAuthenticated, posts, dispatch} = this.props
+        console.log(posts)
+        posts = JSON.parse(posts)
         return <Grid>
             <Col sm={9}>
                 {posts.map(o => {
-                    const {createdAt, body} = o
-                    return (<BlogPost body={body} createdAt={createdAt}/>)
+                    const {createdAt, body, id} = o
+                    return (<BlogPost post={{body, createdAt, id}} isAuthenticated={isAuthenticated} onEditClick={() => {dispatch(updateBlogPreviewContent({body, id}))}}/>)
                 })}
             </Col>
             <Col sm={3}>
@@ -41,13 +42,12 @@ class Blog extends Component {
 
 Blog.propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
-    posts: PropTypes.array.isRequired,
+    posts: PropTypes.string.isRequired,
     dispatch: PropTypes.func.isRequired,
     errorMessage: PropTypes.string
 }
 
 function mapStateToProps(state) {
-    console.log(state)
     const {blogPosts, auth} = state
     const {isAuthenticated, user} = auth
     const {posts} = blogPosts
