@@ -8,12 +8,15 @@ class NewRepoElem extends Component {
 
     render() {
         const {isAuthenticated, elem} = this.props
-        const {id, link, title, summary, type} = elem
+        const {id, link, title, summary, tags} = elem
+        const tagString = JSON.parse(tags).reduce((prev, curr) => {
+            return prev + " " + curr
+        }, "")
         return isAuthenticated && (
             <Grid>
                 <Col sm={8}>
                     <PageHeader className="subHeader">Preview</PageHeader>
-                    <RepoElement id={id} type={type} link={link} title={title} summary={summary} isAuthenticated={isAuthenticated}/>
+                    <RepoElement elem={elem} isAuthenticated={isAuthenticated}/>
                     <PageHeader className="subHeader">New</PageHeader>
                     <Row>
                         <Col sm={3}>
@@ -23,7 +26,7 @@ class NewRepoElem extends Component {
                         </Col>
                         <Col sm={3}>
                             <div className="input-group">
-                                <input ref="type" type="text" defaultValue={type} className="form-control" placeholder="Type" onChange={(event) => this.handleOnChange(event)}/>
+                                <input ref="tags" type="text" defaultValue={tagString} className="form-control" placeholder="Tags" onChange={(event) => this.handleOnChange(event)}/>
                             </div>
                         </Col>
                         <Col sm={3}>
@@ -53,10 +56,10 @@ class NewRepoElem extends Component {
         const summary = this.refs.summary.value.trim()
         const title = this.refs.title.value.trim()
         const link = this.refs.link.value.trim()
-        const type = this.refs.type.value.trim()
+        const tags = JSON.stringify(this.refs.tags.value.trim().split(" "))
 
         const {dispatch} = this.props
-        dispatch(updateElemPreview({type, link, title, summary}))
+        dispatch(updateElemPreview({tags, link, title, summary}))
     }
 
     handleSubmit(event) {

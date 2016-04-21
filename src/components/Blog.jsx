@@ -12,20 +12,25 @@ class Blog extends Component {
 
     componentWillMount() {
         const {dispatch, user} = this.props
-        //Fetch blogposts
         dispatch(fetchPosts({username: "test"}))
     }
 
     render() {
         let {isAuthenticated, posts, dispatch} = this.props
+        console.log(this.props)
         posts = JSON.parse(posts)
         return <Grid>
-            <Col sm={9}>
+            <PageHeader className="subHeader">
+                Blog
+            </PageHeader>
+            <Col sm={6}>
                 {posts.map(post => {
-                    return (<BlogPost post={post} isAuthenticated={isAuthenticated} onEditClick={() => {dispatch(updateBlogPreviewContent(post))}} onRemoveClick={() => dispatch(removeBlogPost(post))}/>)
+                    return (<BlogPost post={post} isAuthenticated={isAuthenticated}
+                                      onEditClick={() => {dispatch(updateBlogPreviewContent(post))}}
+                                      onRemoveClick={() => dispatch(removeBlogPost(post))}/>)
                 })}
             </Col>
-            <Col sm={3}>
+            <Col sm={3} smOffset={6}>
                 <PostCalendar /*posts={}*//>
                 {
                     isAuthenticated &&

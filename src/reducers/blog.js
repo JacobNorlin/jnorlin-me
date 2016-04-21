@@ -7,7 +7,12 @@ export function blogApiCall(state = {
     isFetching: false,
     isPosting: false,
     authenticated: true,
-    post: {body: " ", id: -1},
+    post: {
+        body: " ",
+        id: -1,
+        title: "",
+        tags: "[]"
+    },
     posts: "[]"
 }, action) {
     switch (action.type) {

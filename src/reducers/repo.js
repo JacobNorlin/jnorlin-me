@@ -7,7 +7,7 @@ export default function repoApiCall(state = {
     elem: {
         summary: " ",
         link: " ",
-        type: " ",
+        tags: "[]",
         title: " ",
         id: -1
     },

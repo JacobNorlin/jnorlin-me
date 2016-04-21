@@ -14,8 +14,7 @@ class RepoList extends Component {
         const {elems, isAuthenticated, dispatch} = this.props
         let elements = JSON.parse(elems)
         return <div>{elements.map(element => {
-            const {id, link, title, summary, type} = element
-            return (<RepoElement onEditClick={() => {dispatch(updateElemPreview(element))}} onRemoveClick={() => {dispatch(removeElem(element))}} id={id} type={type} link={link} title={title} summary={summary} isAuthenticated={isAuthenticated}/>)
+            return (<RepoElement onEditClick={() => {dispatch(updateElemPreview(element))}} onRemoveClick={() => {dispatch(removeElem(element))}} elem={element} isAuthenticated={isAuthenticated}/>)
         })
         }
         </div>

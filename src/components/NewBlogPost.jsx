@@ -5,7 +5,7 @@ import {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {Grid, Row, Col, Button, PageHeader} from 'react-bootstrap'
 import {addBlogPost, updateBlogPreviewContent} from '../actions/blog.js'
-import PostPreview from './PostPreview.jsx'
+import BlogPost from './BlogPost.jsx'
 import Textarea from 'react-textarea-autosize'
 
 class NewBlogPost extends Component {
@@ -13,18 +13,43 @@ class NewBlogPost extends Component {
 
     render() {
         const {isAuthenticated, post} = this.props
-        const {body, id} = post
+        const {body, id, tags, title} = post
+        const tagString = JSON.parse(tags).reduce((prev, curr) => {
+            return prev + " " + curr
+        }, "")
         return isAuthenticated && <Grid>
                 <PageHeader className="subHeader">Preview</PageHeader>
-                <PostPreview/>
+                <BlogPost isAuthenticated={isAuthenticated}
+                          post={post}/>
                 <PageHeader className="subHeader">
                     New Post
                 </PageHeader>
-                <form className="form-inline" role="form">
-                    <div className="form-group">
-                        <textarea rows={25} cols={100} ref="blogpost" onChange={(event) => this.handleOnChange(event)} defaultValue={body}/>
-                    </div>
-                </form>
+                <Row>
+                    <Col sm={3}>
+                        <div className="input-group">
+                            <input ref="title" type="text" defaultValue={title} className="form-control"
+                                   placeholder="Title"
+                                   onChange={(event) => this.handleOnChange(event)}/>
+                        </div>
+                    </Col>
+                    <Col sm={3}>
+                        <div className="input-group">
+                            <input ref="tags" type="text" defaultValue={tagString} className="form-control"
+                                   placeholder="Tags"
+                                   onChange={(event) => this.handleOnChange(event)}/>
+                        </div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col sm={8}>
+                        <form className="form-inline" role="form">
+                            <div className="form-group">
+                        <textarea rows={25} cols={100} ref="blogpost" onChange={(event) => this.handleOnChange(event)}
+                                  defaultValue={body}/>
+                            </div>
+                        </form>
+                    </Col>
+                </Row>
                 <Button type="submit" href="#/blog" onClick={(event) => {this.handleSubmit(event)}}>Submit</Button>
                 <Button type="submit" href="#/blog">Back</Button>
             </Grid>
@@ -33,7 +58,7 @@ class NewBlogPost extends Component {
 
     componentWillUnmount() {
         const {dispatch} = this.props
-        dispatch(updateBlogPreviewContent({body:"", id:-1}))
+        dispatch(updateBlogPreviewContent({body: "", id: -1, tags: "", title: ""}))
     }
 
 
@@ -44,8 +69,10 @@ class NewBlogPost extends Component {
 
     handleOnChange(event) {
         const body = this.refs.blogpost.value.trim()
+        const tags = JSON.stringify(this.refs.tags.value.trim().split(" "))
+        const title = this.refs.title.value.trim()
         const {dispatch, post} = this.props
-        dispatch(updateBlogPreviewContent({body, id: post.id}))
+        dispatch(updateBlogPreviewContent({body, tags, title, id: post.id}))
 
     }
 }
