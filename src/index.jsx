@@ -11,6 +11,7 @@ import thunkMiddleware from 'redux-thunk'
 import blogApp from './reducers/index.js'
 import {Provider} from 'react-redux'
 import api from './api/api.js'
+import NewRepoElem from './components/NewRepoElem.jsx'
 
 require('bootstrap-webpack')
 require('./css/main2.css')
@@ -30,6 +31,7 @@ render(
 				<Route path="repo" component={Repo}/>
 				<Route path="blog" component={Blog}/>
 				<Route path="blog/new" component={NewBlogPost}/>
+				<Route path="repo/new" component={NewRepoElem}/>
 			</Route>
 		</Router>
 	</Provider>,

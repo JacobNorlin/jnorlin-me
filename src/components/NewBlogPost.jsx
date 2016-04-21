@@ -15,9 +15,9 @@ class NewBlogPost extends Component {
         const {isAuthenticated, post} = this.props
         const {body, id} = post
         return isAuthenticated && <Grid>
-                <PageHeader>Preview</PageHeader>
+                <PageHeader className="subHeader">Preview</PageHeader>
                 <PostPreview/>
-                <PageHeader>
+                <PageHeader className="subHeader">
                     New Post
                 </PageHeader>
                 <form className="form-inline" role="form">
@@ -39,7 +39,6 @@ class NewBlogPost extends Component {
 
     handleSubmit(event) {
         const {dispatch, post} = this.props
-        const body = this.refs.blogpost.value.trim()
         dispatch(addBlogPost(post))
     }
 

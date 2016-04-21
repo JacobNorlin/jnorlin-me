@@ -1,13 +1,14 @@
-import {API_REQUEST, API_REQUEST_FAILURE, API_REQUEST_FETCHELEMS_SUCCESS, API_REQUEST_ADDELEM_SUCCESS, API_REQUEST_REMOVEELEM_SUCCESS} from '../actions/repo.js'
+import {REPO_ELEM_PREVIEW_UPDATE, API_REQUEST, API_REQUEST_FAILURE, API_REQUEST_FETCHELEMS_SUCCESS, API_REQUEST_ADDELEM_SUCCESS, API_REQUEST_REMOVEELEM_SUCCESS} from '../actions/repo.js'
 
 export default function repoApiCall(state = {
     isFetching: false,
     isPosting: false,
     authenticated: true,
     elem: {
-        body: "",
-        link: "",
-        type: "",
+        summary: " ",
+        link: " ",
+        type: " ",
+        title: " ",
         id: -1
     },
     elems: "[]"
@@ -47,6 +48,12 @@ export default function repoApiCall(state = {
         {
             return Object.assign({}, state, {
                 isFetching: false
+            })
+        }
+        case REPO_ELEM_PREVIEW_UPDATE:
+        {
+            return Object.assign({}, state, {
+                elem: action.elem
             })
         }
         default:

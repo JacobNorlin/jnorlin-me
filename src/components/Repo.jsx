@@ -3,7 +3,7 @@ import {Component, PropTypes} from 'react'
 import {Grid, Row, Col, Navbar, Nav, NavItem, PageHeader} from 'react-bootstrap';
 import RepoList from './RepoList.jsx';
 import {connect} from 'react-redux'
-import {fetchElems, removeElem, addElem} from '../actions/repo.js'
+import {fetchElems, removeElem, addElem, updateElemPreview} from '../actions/repo.js'
 
 class Repo extends Component {
 
@@ -14,7 +14,8 @@ class Repo extends Component {
     }
 
     render() {
-        const {elems, isAuthenticated} = this.props
+        const {elems, isAuthenticated, dispatch} = this.props
+        console.log(this.props)
         return <Grid>
             <Row>
                 <PageHeader className="subHeader">
@@ -27,35 +28,35 @@ class Repo extends Component {
                 </p>
             </Row>
             <Row>
+                {
+                    isAuthenticated &&
+                    <a href="#/repo/new">New Entry</a>
+                }
                 <Col sm={6}>
                     <PageHeader className="subHeader">
-                        videos
+                        elements
                     </PageHeader>
-                    <RepoList elements={JSON.parse(elems)}/>
-                </Col>
-                <Col smOffset={6}>
-                    <PageHeader className="subHeader">
-                        texts
-                    </PageHeader>
+                    <RepoList/>
                 </Col>
             </Row>
         </Grid>
     }
+
+
+
 }
 
 Repo.propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
-    elems: PropTypes.string.isRequired,
     dispatch: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) {
-    const {auth, repoApiCall} = state
+    console.log(state)
+    const {auth} = state
     const {isAuthenticated} = auth
-    const {elems} = repoApiCall
     return {
-        isAuthenticated,
-        elems
+        isAuthenticated
     }
 }
 

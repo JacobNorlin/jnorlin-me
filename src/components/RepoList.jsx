@@ -1,39 +1,43 @@
 "use strict";
-import React from 'react';
+import {Component, PropTypes} from 'react';
 import _ from 'lodash';
 import ProjectElem from './ProjectElem.jsx';
 import ExperienceElem from './ExperienceElem.jsx';
-import RepoElem from './RepoElement.jsx';
+import RepoElement from './RepoElement.jsx';
+import {removeElem, updateElemPreview} from '../actions/repo.js'
+import {connect} from 'react-redux'
 
-export default class RepoList extends React.Component{
-	constructor(props){
-		super(props);
-		this.state = {elements: props.elements};
-	}
+class RepoList extends Component {
 
-	_createElement(data){
-		//This feel dumb
-		switch(data.type){
-			case "project":
-				return <ProjectElem link={data.link} repo={data.repo} description={data.description} title={data.title} key={data.title} />
-			case "repo":
-				return <RepoElem link={data.link} summary={data.summary} title={data.title} key={data.title} />
-			case "experience":
-				return <ExperienceElem location={data.location} description={data.description} title={data.title} workPlace={data.workplace} timeRange={data.timeRange} key={data.workplace} />
-			
-		}
-	}
 
-	_createList(){
-		//Should try to get Array.map to work...
-		return _.map(this.state.elements,  this._createElement);
-	}
+    render() {
+        const {elems, isAuthenticated, dispatch} = this.props
+        let elements = JSON.parse(elems)
+        return <div>{elements.map(element => {
+            const {id, link, title, summary, type} = element
+            return (<RepoElement onEditClick={() => {dispatch(updateElemPreview(element))}} onRemoveClick={() => {dispatch(removeElem(element))}} id={id} type={type} link={link} title={title} summary={summary} isAuthenticated={isAuthenticated}/>)
+        })
+        }
+        </div>
 
-	render(){
-		let a = this._createList();
-		return <div> {a} </div>
-	}
+    }
+
+
 }
 RepoList.propTypes = {
-	elements: React.PropTypes.array
+    elems: PropTypes.string.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired
 }
+
+function mapStateToProps(state){
+    const {auth, repoApiCall} = state
+    const {isAuthenticated} = auth
+    const {elems} = repoApiCall
+
+    return {
+        isAuthenticated,
+        elems
+    }
+}
+
+export default connect(mapStateToProps)(RepoList)

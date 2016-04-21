@@ -45,6 +45,7 @@ export default store => next => action => {
 	let {endpoint, types, authenticated, method, data} = callAPI
 
 	const [requestType, successType, errorType] = types
+	console.log(types)
 
 	return callApi(endpoint, authenticated, method, data).then(
 		response => 
