@@ -1,6 +1,6 @@
 "use strict"
 
-import {BLOG_FETCH_REQUEST, BLOG_FETCH_SUCCESS, BLOG_FETCH_FAILURE, BLOG_POST_REMOVE, BLOG_POST_REQUEST, BLOG_POST_SUCCESS, BLOG_POST_FAILURE, BLOG_POST_UPDATE} from '../actions/blog.js'
+import {BLOG_SEARCH_FAILURE, BLOG_SEARCH_REQUEST, BLOG_SEARCH_SUCCESS, BLOG_FETCH_REQUEST, BLOG_FETCH_SUCCESS, BLOG_FETCH_FAILURE, BLOG_POST_REMOVE, BLOG_POST_REQUEST, BLOG_POST_SUCCESS, BLOG_POST_FAILURE, BLOG_POST_UPDATE} from '../actions/blog.js'
 
 
 export function blogApiCall(state = {
@@ -67,6 +67,29 @@ export function blogApiCall(state = {
                 isPosting: false
             })
         }
+
+        case BLOG_SEARCH_REQUEST:
+        {
+            return Object.assign({}, state, {
+                isSearching: true,
+            })
+        }
+
+        case BLOG_SEARCH_SUCCESS:
+        {
+            return Object.assign({}, state, {
+                isSearching: false,
+                searchResult: action.response,
+            })
+        }
+        case BLOG_FETCH_FAILURE:
+        {
+            return Object.assign({}, state, {
+                isSearching: false,
+                searchError: action.response
+            })
+        }
+
         default:
             return state
     }
