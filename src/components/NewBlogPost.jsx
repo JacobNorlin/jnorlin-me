@@ -14,9 +14,7 @@ class NewBlogPost extends Component {
     render() {
         const {isAuthenticated, post} = this.props
         const {body, id, tags, title} = post
-        const tagString = JSON.parse(tags).reduce((prev, curr) => {
-            return prev + " " + curr
-        }, "")
+        const tagString = tags
         return isAuthenticated && <Grid>
                 <PageHeader className="subHeader">Preview</PageHeader>
                 <BlogPost isAuthenticated={isAuthenticated}
@@ -69,7 +67,7 @@ class NewBlogPost extends Component {
 
     handleOnChange(event) {
         const body = this.refs.blogpost.value.trim()
-        const tags = JSON.stringify(this.refs.tags.value.trim().split(" "))
+        const tags = this.refs.tags.value
         const title = this.refs.title.value.trim()
         const {dispatch, post} = this.props
         dispatch(updateBlogPreviewContent({body, tags, title, id: post.id}))

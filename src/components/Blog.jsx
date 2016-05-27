@@ -6,14 +6,23 @@ import {Row, Col, Glyphicon, Grid, PageHeader, Navbar, NavItem, Nav, Button} fro
 import LoginButton from './LoginButton.jsx'
 import PostCalendar from './PostCalendar.jsx'
 import {fetchPosts, updateBlogPreviewContent, removeBlogPost} from '../actions/blog.js'
-import {search} from '../actions/search'
+import {searchBlog} from '../actions/blog'
 import BlogPost from './BlogPost.jsx'
 
 class Blog extends Component {
 
-    componentWillMount() {
+    fetchPosts(){
         const {dispatch, user} = this.props
-        dispatch(search({username:user.username, id: user.id}))
+        const {tags=""} = this.props.location.query
+        dispatch(searchBlog({username:user.username, id: user.id, tags}))
+    }
+
+    componentWillMount() {
+        this.fetchPosts()
+    }
+
+    componentDidUpdate(){
+        this.fetchPosts()
     }
 
     render() {
@@ -23,15 +32,7 @@ class Blog extends Component {
             <PageHeader className="subHeader">
                 Blog
             </PageHeader>
-            <Row>
-                <Col sm={3}>
-                    <div className="input-group">
-                        <input ref="search" type="text"  className="form-control"
-                               placeholder="Search..."
-                               onChange={(event) => this.handleOnChange(event)}/>
-                    </div>
-                </Col>
-            </Row>
+
             <Row>
                 <Col sm={6}>
                     {searchResult.map(post => {
@@ -82,9 +83,10 @@ Blog.propTypes = {
 }
 
 function mapStateToProps(state) {
-    const {search, auth} = state
+    const {blogApiCall, auth} = state
     const {isAuthenticated, user} = auth
-    const {searchResult} = search
+    const {searchResult} = blogApiCall
+    console.log(searchResult)
 
     return {
         isAuthenticated,

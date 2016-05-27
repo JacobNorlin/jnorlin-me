@@ -3,9 +3,10 @@
 import cfg from '../config/apicfg.js'
 
 function callApi(endpoint, authenticated, method, data) {
+
     let user = JSON.parse(localStorage.getItem('user')) || null
     let req = createRequest(authenticated, method, user, data, endpoint)
-
+    console.log(req)
 
     return fetch(req)
         .then(response =>
@@ -57,26 +58,6 @@ function createRequestConfig(authenticated, method, user, data){
     return config
 }
 
-function reqWithParams(type, route, params){
-    let config = {
-        headers: {
-            'Authorization': `Bearer ${user.id_token}`,
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        method: method,
-        mode: 'cors'
-    }
-    switch (type){
-        case 'GET':{
-            return {
-
-            }
-        }
-        case 'POST':{
-
-        }
-    }
-}
 
 export const CALL_API = Symbol('Call API')
 

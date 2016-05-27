@@ -1,6 +1,6 @@
 "use strict"
 
-import {BLOG_SEARCH_FAILURE, BLOG_SEARCH_REQUEST, BLOG_SEARCH_SUCCESS, BLOG_FETCH_REQUEST, BLOG_FETCH_SUCCESS, BLOG_FETCH_FAILURE, BLOG_POST_REMOVE, BLOG_POST_REQUEST, BLOG_POST_SUCCESS, BLOG_POST_FAILURE, BLOG_POST_UPDATE} from '../actions/blog.js'
+import {BLOG_SEARCH_FAILURE, BLOG_SEARCH_REQUEST, BLOG_SEARCH_SUCCESS, BLOG_POST_REMOVE, BLOG_POST_REQUEST, BLOG_POST_SUCCESS, BLOG_POST_FAILURE, BLOG_POST_UPDATE} from '../actions/blog.js'
 
 
 export function blogApiCall(state = {
@@ -11,31 +11,11 @@ export function blogApiCall(state = {
         body: " ",
         id: -1,
         title: "",
-        tags: "[]"
+        tags: ""
     },
-    posts: "[]"
+    searchResult: "[]"
 }, action) {
     switch (action.type) {
-        case BLOG_FETCH_REQUEST:
-        {
-            return Object.assign({}, state, {
-                isFetching: true
-            })
-        }
-        case BLOG_FETCH_SUCCESS:
-        {
-            return Object.assign({}, state, {
-                isFetching: false,
-                posts: action.response,
-                authenticated: action.authenticated || false
-            })
-        }
-        case BLOG_FETCH_FAILURE:
-        {
-            return Object.assign({}, state, {
-                isFetching: false
-            })
-        }
         case BLOG_POST_REQUEST:
         {
             return Object.assign({}, state, {
@@ -82,7 +62,7 @@ export function blogApiCall(state = {
                 searchResult: action.response,
             })
         }
-        case BLOG_FETCH_FAILURE:
+        case BLOG_SEARCH_FAILURE:
         {
             return Object.assign({}, state, {
                 isSearching: false,

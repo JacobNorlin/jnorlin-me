@@ -2,16 +2,14 @@
 
 import {CALL_API} from '../api/api.js'
 
-export const BLOG_FETCH_REQUEST = 'BLOG_FETCH_REQUEST'
-export const BLOG_FETCH_SUCCESS = 'BLOG_FETCH_SUCCESS'
-export const BLOG_FETCH_FAILURE = 'BLOG_FETCH_FAILURE'
 
-export function fetchPosts(user) {
+export function searchBlog(query) {
     return {
         [CALL_API]: {
-            endpoint: 'blog/' + user.username,
-            types: [BLOG_FETCH_REQUEST, BLOG_FETCH_SUCCESS, BLOG_FETCH_FAILURE],
-            type: 'GET'
+            endpoint: 'blog/search',
+            data: query,
+            types: [BLOG_SEARCH_REQUEST, BLOG_SEARCH_SUCCESS, BLOG_SEARCH_FAILURE],
+            method: 'GET'
         }
     }
 }

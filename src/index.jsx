@@ -29,8 +29,8 @@ render(
 			<Route path="/" component={App}>
 				<IndexRoute component={Personal}/>
 				<Route path="repo" component={Repo}/>
-				<Route path="blog" component={Blog}/>
 				<Route path="blog/new" component={NewBlogPost}/>
+				<Route path="blog" component={Blog}/>
 				<Route path="repo/new" component={NewRepoElem}/>
 			</Route>
 		</Router>

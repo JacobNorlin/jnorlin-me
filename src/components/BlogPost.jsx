@@ -7,7 +7,7 @@ export default class BlogPost extends Component {
     render() {
         const {post, onEditClick, onRemoveClick, isAuthenticated} = this.props
         const {body, createdAt, id, title, tags} = post
-        const tagList = JSON.parse(tags)
+        const tagList = tags.split(" ")
         return (<Grid>
             <PageHeader className="subHeader">
                 {title}
