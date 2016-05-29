@@ -26,15 +26,18 @@ class Blog extends Component {
     }
 
     render() {
-        let {isAuthenticated, searchResult, dispatch} = this.props
-        searchResult = JSON.parse(searchResult)
+        let {isAuthenticated, searchResult, dispatch, isSearching} = this.props
+        searchResult = JSON.parse(searchResult).reverse()
+        console.log(searchResult)
         return <Grid>
+            <Row>
+            {isSearching && <b>Loading...</b>}
+            </Row>
             <PageHeader className="subHeader">
                 Blog
             </PageHeader>
-
             <Row>
-                <Col sm={6}>
+                <Col sm={6} md={3}>
                     {searchResult.map(post => {
                         return (<BlogPost post={post} isAuthenticated={isAuthenticated}
                                           onEditClick={() => {dispatch(updateBlogPreviewContent(post))}}
@@ -42,7 +45,7 @@ class Blog extends Component {
                     })}
                 </Col>
                 <Col sm={3} smOffset={6}>
-                    <PostCalendar /*posts={}*//>
+                    <PostCalendar/>
                     {
                         isAuthenticated &&
                         <a href="#/blog/new">New Post</a>
@@ -52,26 +55,6 @@ class Blog extends Component {
         </Grid>
     }
 
-    parseQuery(queryString){
-        const terms = queryString.split(" ")
-        const tags = terms.filter(term => {
-            return term.indexOf("#") > -1
-        })
-        const text  = terms.filter(term => {
-            return term.indexOf("#") < 0
-        })
-        return {tags, text}
-    }
-
-    handleOnChange(event){
-        const {dispatch, user} = this.props
-        const queryString = this.refs.search.value.trim()
-        let queryObj = parseQuery(queryString)
-        queryObj = Object.assign({}, queryObj, {
-            user
-        })
-        dispatch(searchBlog(queryObj))
-    }
 
 }
 
@@ -85,13 +68,13 @@ Blog.propTypes = {
 function mapStateToProps(state) {
     const {blogApiCall, auth} = state
     const {isAuthenticated, user} = auth
-    const {searchResult} = blogApiCall
-    console.log(searchResult)
+    const {searchResult, isSearching} = blogApiCall
 
     return {
         isAuthenticated,
         user,
-        searchResult
+        searchResult,
+        isSearching
     }
 }
 

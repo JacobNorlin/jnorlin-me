@@ -6,15 +6,14 @@ import Tag from './Tag.jsx'
 export default class BlogPost extends Component {
     render() {
         const {post, onEditClick, onRemoveClick, isAuthenticated} = this.props
-        const {body, createdAt, id, title, tags} = post
+        const {body, createdAt, updatedAt, title, tags} = post
         const tagList = tags.split(" ")
         return (<Grid>
             <PageHeader className="subHeader">
                 {title}
             </PageHeader>
             <small className="subHeader">
-                {createdAt == undefined ?
-                (this.formateDate(new Date())) : (this.formateDate(new Date(createdAt)))}
+                posted: {this.formatDate(new Date(createdAt))}  updated: {this.formatDate(new Date(updatedAt)  )}
             </small><br/>
             <small>
                 {
@@ -36,7 +35,7 @@ export default class BlogPost extends Component {
         </Grid>)
     }
 
-    formateDate(date) {
+    formatDate(date) {
         return date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate()
     }
 }

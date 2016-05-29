@@ -8,11 +8,14 @@ import {addBlogPost, updateBlogPreviewContent} from '../actions/blog.js'
 import BlogPost from './BlogPost.jsx'
 import Textarea from 'react-textarea-autosize'
 
+
+
+
 class NewBlogPost extends Component {
 
 
     render() {
-        const {isAuthenticated, post} = this.props
+        const {isAuthenticated, post, isPosting} = this.props
         const {body, id, tags, title} = post
         const tagString = tags
         return isAuthenticated && <Grid>
@@ -48,7 +51,10 @@ class NewBlogPost extends Component {
                         </form>
                     </Col>
                 </Row>
-                <Button type="submit" href="#/blog" onClick={(event) => {this.handleSubmit(event)}}>Submit</Button>
+                <Button type="submit" href="#/blog" disabled={isPosting}
+                        onClick={(event) => {this.handleSubmit(event)}}>
+                    {isPosting ? "Loading..." : "Submit"}
+                </Button>
                 <Button type="submit" href="#/blog">Back</Button>
             </Grid>
 
@@ -85,11 +91,12 @@ function mapStateToProps(state) {
     console.log(state)
     const {auth, blogApiCall} = state
     const {isAuthenticated} = auth
-    const {post} = blogApiCall
+    const {post, isPosting} = blogApiCall
 
     return {
         isAuthenticated,
-        post
+        post,
+        isPosting
     }
 }
 
