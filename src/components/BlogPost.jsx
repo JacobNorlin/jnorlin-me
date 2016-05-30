@@ -9,21 +9,22 @@ export default class BlogPost extends Component {
         const {body, createdAt, updatedAt, title, tags} = post
         const tagList = tags.split(" ")
         return (<Grid>
-            <PageHeader className="subHeader">
-                {title}
-            </PageHeader>
-            <small className="subHeader">
-                posted: {this.formatDate(new Date(createdAt))}  updated: {this.formatDate(new Date(updatedAt)  )}
-            </small><br/>
-            <small>
-                {
-                    tagList.map(tag => {
-                        return <Tag tag={tag}/>
-                    })
-                }
-            </small>
+
             <Row>
                 <Col sm={8}>
+                    <PageHeader className="subHeader">
+                        {title}
+                    </PageHeader>
+                    <small className="subHeader">
+                        posted: {this.formatDate(new Date(createdAt))}  updated: {this.formatDate(new Date(updatedAt)  )}
+                    </small><br/>
+                    <small>
+                        {
+                            tagList.map(tag => {
+                                return <Tag tag={tag}/>
+                            })
+                        }
+                    </small>
                     {isAuthenticated && (onEditClick !== undefined) &&
                     (<div>
                         <a href="#/blog/new" onClick={onEditClick}>Edit post</a>
