@@ -13,8 +13,8 @@ class Blog extends Component {
 
     fetchPosts(){
         const {dispatch, user} = this.props
-        const {tags=""} = this.props.location.query
-        dispatch(searchBlog({username:user.username, id: user.id, tags}))
+        const {tags="", postId} = this.props.location.query
+        dispatch(searchBlog({username:user.username, id: user.id, tags, postId}))
     }
 
     componentWillMount() {

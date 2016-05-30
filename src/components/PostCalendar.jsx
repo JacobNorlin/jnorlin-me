@@ -27,7 +27,7 @@ export default class PostCalendar extends Component {
 
         const postsInMonth = posts => {
             return posts.map(p => {
-                return <Row><a>{p.title}</a></Row>
+                return <Row><a href={"#/blog/?postId="+p.id}>{p.title}</a></Row>
             })
         }
 
