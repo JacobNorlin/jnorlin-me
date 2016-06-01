@@ -38,7 +38,9 @@ class Blog extends Component {
             </PageHeader>
             <Row>
                 <Col sm={6} md={3}>
-                    {searchResult.map(post => {
+                    {
+                        isSearching ? "Loading..." :
+                        searchResult.map(post => {
                         return (<BlogPost post={post} isAuthenticated={isAuthenticated}
                                           onEditClick={() => {dispatch(updateBlogPreviewContent(post))}}
                                           onRemoveClick={() => dispatch(removeBlogPost(post))}/>)

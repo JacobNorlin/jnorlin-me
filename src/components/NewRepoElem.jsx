@@ -60,13 +60,14 @@ class NewRepoElem extends Component {
         const title = this.refs.title.value.trim()
         const link = this.refs.link.value.trim()
         const tags = this.refs.tags.value
+        const {dispatch, elem} = this.props
 
-        const {dispatch} = this.props
-        dispatch(updateElemPreview({tags, link, title, summary}))
+        dispatch(updateElemPreview({tags, link, title, summary, id:elem.id}))
     }
 
     handleSubmit(event) {
         const {dispatch, elem} = this.props
+        console.log(elem)
         dispatch(addElem(elem))
     }
 

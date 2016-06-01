@@ -52,7 +52,7 @@ export function blogApiCall(state = {
         case BLOG_SEARCH_REQUEST:
         {
             return Object.assign({}, state, {
-                isSearching: true,
+                isSearching: true
             })
         }
 

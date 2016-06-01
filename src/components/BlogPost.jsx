@@ -27,8 +27,8 @@ export default class BlogPost extends Component {
                     </small>
                     {isAuthenticated && (onEditClick !== undefined) &&
                     (<div>
-                        <a href="#/blog/new" onClick={onEditClick}>Edit post</a>
-                        <a href="#/blog" onClick={onRemoveClick}> Remove post</a>
+                        <a href="#/blog/new" onClick={onEditClick}>Edit</a>
+                        <a href="#/blog" onClick={onRemoveClick}> Remove</a>
                     </div>)}
                     <ReactMarkdown source={body}/>
                 </Col>
