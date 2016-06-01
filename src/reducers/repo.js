@@ -1,19 +1,33 @@
-import {REPO_ELEM_PREVIEW_UPDATE, API_REQUEST, API_REQUEST_FAILURE, API_REQUEST_FETCHELEMS_SUCCESS, API_REQUEST_ADDELEM_SUCCESS, API_REQUEST_REMOVEELEM_SUCCESS} from '../actions/repo.js'
+import {
+    REPO_POST_ERROR,
+    REPO_ELEM_PREVIEW_UPDATE,
+    API_REQUEST,
+    API_REQUEST_FAILURE,
+    API_REQUEST_FETCHELEMS_SUCCESS,
+    API_REQUEST_ADDELEM_SUCCESS,
+    API_REQUEST_REMOVEELEM_SUCCESS} from '../actions/repo.js'
 
 export default function repoApiCall(state = {
     isFetching: false,
     isPosting: false,
     authenticated: true,
     elem: {
-        summary: " ",
-        link: " ",
+        summary: "",
+        link: "",
         tags: "",
-        title: " ",
+        title: "",
         id: -1
     },
-    searchResult: "[]"
+    searchResult: "[]",
+    postError: []
 }, action) {
     switch (action.type) {
+        case REPO_POST_ERROR:
+        {
+            return Object.assign({}, state, {
+                postError: action.postError,
+            })
+        }
         case API_REQUEST:
         {
             return Object.assign({}, state, {

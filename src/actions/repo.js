@@ -6,6 +6,7 @@ export const API_REQUEST_ADDELEM_SUCCESS = 'API_ADDELEM'
 export const API_REQUEST_REMOVEELEM_SUCCESS = 'API_REQUEST_REMOVEELEM'
 export const API_REQUEST_FAILURE = 'API_REQUEST_FAILURE'
 export const API_REQUEST = 'API_REQUEST'
+export const REPO_POST_ERROR = 'REPO_POST_ERROR'
 
 export function searchRepo(query){
     return {
@@ -19,15 +20,40 @@ export function searchRepo(query){
 }
 
 export function addElem(elem){
-    return {
-        [CALL_API]: {
-            endpoint: 'repo/protected/addElem',
-            authenticated: true,
-            types: [API_REQUEST, API_REQUEST_ADDELEM_SUCCESS, API_REQUEST_FAILURE],
-            method: 'POST',
-            data: elem
+    const faults = checkSubmitValidity(elem)
+    if(faults.length > 0){
+        return {
+            postError: faults,
+            type: REPO_POST_ERROR
+        }
+    }else{
+        window.location = "#/repo" //this is really dumb...
+        return {
+            [CALL_API]: {
+                endpoint: 'repo/protected/addElem',
+                authenticated: true,
+                types: [API_REQUEST, API_REQUEST_ADDELEM_SUCCESS, API_REQUEST_FAILURE],
+                method: 'POST',
+                data: elem
+            }
         }
     }
+}
+
+function checkSubmitValidity(elem){
+    const {link, title, summary, tags} = elem
+    console.log(elem)
+    let faults = new Array()
+    if(link === ""){
+        faults.push("link")
+    }
+    if(title === ""){
+        faults.push("title")
+    }
+    if(summary === ""){
+        faults.push("summary")
+    }
+    return faults
 }
 
 export function removeElem(elem){

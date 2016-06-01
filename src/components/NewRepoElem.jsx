@@ -7,14 +7,16 @@ import {updateElemPreview, addElem} from '../actions/repo.js'
 class NewRepoElem extends Component {
 
     render() {
-        const {isAuthenticated, elem} = this.props
+        const {isAuthenticated, elem, postError} = this.props
         const {id, link, title, summary, tags} = elem
         const tagString = tags
         return isAuthenticated && (
             <Grid>
                 <Col sm={8}>
                     <PageHeader className="subHeader">Preview</PageHeader>
-                    <RepoElement elem={elem} isAuthenticated={isAuthenticated}/>
+                    <Row>
+                        <RepoElement elem={elem} isAuthenticated={isAuthenticated}/>
+                    </Row>
                     <PageHeader className="subHeader">New</PageHeader>
                     <Row>
                         <Col sm={3}>
@@ -28,7 +30,7 @@ class NewRepoElem extends Component {
                             </div>
                         </Col>
                         <Col sm={3}>
-                            <div className="input-group">
+                            <div    className="input-group">
                                 <input ref="link" type="text" defaultValue={link} className="form-control" placeholder="Link" onChange={(event) => this.handleOnChange(event)}/>
                             </div>
                         </Col>
@@ -43,8 +45,11 @@ class NewRepoElem extends Component {
                             </form>
                         </Col>
                     </Row>
-                    <Button type="submit" href="#/repo" onClick={(event) => {this.handleSubmit(event)}}>Submit</Button>
+                    <Button type="submit" onClick={(event) => {this.handleSubmit(event)}}>Submit</Button>
                     <Button type="submit" href="#/repo">Back</Button>
+                    {
+                        postError.length > 0 ? "Please add "+postError : ""
+                    }
                 </Col>
             </Grid>
         )
@@ -76,16 +81,18 @@ class NewRepoElem extends Component {
 NewRepoElem.propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
-    elem: PropTypes.object.isRequired
+    elem: PropTypes.object.isRequired,
+    postError: PropTypes.array.isRequired
 }
 
 function mapStateToProps(state) {
     const {auth, repoApiCall} = state
     const {isAuthenticated} = auth
-    const {elem} = repoApiCall
+    const {elem, postError} = repoApiCall
     return {
         isAuthenticated,
-        elem
+        elem,
+        postError
     }
 }
 

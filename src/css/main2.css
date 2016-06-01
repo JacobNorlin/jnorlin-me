@@ -21,3 +21,10 @@ body{
 	width: 100px;
 	height: 20px;
 }
+
+.repoElem{
+	border: solid;
+	border-width: 0.1px;
+	border-color: #a6e1ec;
+	margin: 20px;
+}

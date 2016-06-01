@@ -6,6 +6,7 @@ import ExperienceElem from './ExperienceElem.jsx';
 import RepoElement from './RepoElement.jsx';
 import {removeElem, updateElemPreview} from '../actions/repo.js'
 import {connect} from 'react-redux'
+import {Grid} from 'react-bootstrap'
 
 class RepoList extends Component {
 
@@ -13,11 +14,11 @@ class RepoList extends Component {
     render() {
         const {searchResult, isAuthenticated, dispatch} = this.props
         let elements = JSON.parse(searchResult).reverse()
-        return <div>{elements.map(element => {
+        return <Grid>{elements.map(element => {
             return (<RepoElement onEditClick={() => {dispatch(updateElemPreview(element))}} onRemoveClick={() => {dispatch(removeElem(element))}} elem={element} isAuthenticated={isAuthenticated}/>)
         })
         }
-        </div>
+        </Grid>
 
     }
 

@@ -30,20 +30,22 @@ class Repo extends Component {
                 <PageHeader className="subHeader">
                     Repo
                 </PageHeader>
-                <p>
-                    A repository of videos and stuff I found interesting. Will compile stuff I watch here and try to
-                    summarize what I saw in an attempt to actually learn or remember something. Optimally I should add
-                    one thing a day.
-                </p>
+                <Col md={6}>
+                    <p>
+                        A repository of videos and stuff I found interesting. Will compile stuff I watch here and try to
+                        summarize what I saw in an attempt to actually learn or remember something. Optimally I should add
+                        one thing a day.
+                    </p>
+                    {
+                        isAuthenticated &&
+                        <a href="#/repo/new">New Entry</a>
+                    }
+                </Col>
             </Row>
             <Row>
-                {
-                    isAuthenticated &&
-                    <a href="#/repo/new">New Entry</a>
-                }
+
                 <Col sm={6}>
                     <PageHeader className="subHeader">
-                        elements
                     </PageHeader>
                     <RepoList/>
                 </Col>

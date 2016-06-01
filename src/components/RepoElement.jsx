@@ -1,14 +1,15 @@
 "use strict"
 import {Component, PropTypes} from 'react';
+import {Col} from 'react-bootstrap'
 import Tag from './Tag.jsx'
 
 export default class RepoElement extends Component {
     render() {
         const {elem, isAuthenticated, onEditClick, onRemoveClick} = this.props
         const {title, link, summary, tags} = elem
-        console.log(tags)
+        console.log(summary)
         const tagList = tags.split(" ")
-        return <div>
+        return <Col md={3} className="repoElem">
             <a href={link}><h2 className="subHeader">{title}</h2></a>
             <small>
                 {
@@ -26,7 +27,7 @@ export default class RepoElement extends Component {
                 <h4 className="subHeader">Summary</h4>
                 <p>{summary}</p>
             </div>
-        </div>
+        </Col>
     }
 
 }
