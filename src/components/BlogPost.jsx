@@ -6,14 +6,14 @@ import Tag from './Tag.jsx'
 export default class BlogPost extends Component {
     render() {
         const {post, onEditClick, onRemoveClick, isAuthenticated} = this.props
-        const {body, createdAt, updatedAt, title, tags} = post
+        const {body, createdAt, updatedAt, title, tags, id} = post
         const tagList = tags.split(" ")
         return (<Grid>
 
             <Row>
                 <Col sm={8}>
                     <PageHeader className="subHeader">
-                        {title}
+                        <a href={"#/blog/?postId="+id}>{title}</a>
                     </PageHeader>
                     <small className="subHeader">
                         posted: {this.formatDate(new Date(createdAt))}  updated: {this.formatDate(new Date(updatedAt)  )}
@@ -21,7 +21,7 @@ export default class BlogPost extends Component {
                     <small>
                         {
                             tagList.map(tag => {
-                                return <Tag tag={tag}/>
+                                return <Tag tag={tag} type="blog"/>
                             })
                         }
                     </small>

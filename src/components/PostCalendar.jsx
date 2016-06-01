@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import {Row, Col, Glyphicon, Grid, PageHeader, Navbar, NavItem, Nav} from 'react-bootstrap';
 import {fetchPostDates, searchBlog} from '../actions/blog'
 import moment from 'moment'
-import 'moment-range'
 
 
 export default class PostCalendar extends Component {

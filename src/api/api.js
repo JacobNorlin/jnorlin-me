@@ -26,6 +26,7 @@ function serialize( obj ) {
 
 function createRequest(authenticated, method, user, data, endpoint){
     let config = createRequestConfig(authenticated, method, user, data)
+    console.log(config)
     switch (method) {
         case 'GET':
         {

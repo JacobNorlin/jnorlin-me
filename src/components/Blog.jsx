@@ -26,15 +26,15 @@ class Blog extends Component {
     }
 
     render() {
-        let {isAuthenticated, searchResult, dispatch, isSearching} = this.props
+        let {isAuthenticated, searchResult, dispatch, isSearching, searchError} = this.props
         searchResult = JSON.parse(searchResult).reverse()
         console.log(searchResult)
+        console.log(isSearching)
         return <Grid>
             <Row>
-            {isSearching && <b>Loading...</b>}
             </Row>
             <PageHeader className="subHeader">
-                Blog
+                <a href="#/blog">Blog</a>
             </PageHeader>
             <Row>
                 <Col sm={6} md={3}>

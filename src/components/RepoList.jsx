@@ -11,8 +11,8 @@ class RepoList extends Component {
 
 
     render() {
-        const {elems, isAuthenticated, dispatch} = this.props
-        let elements = JSON.parse(elems)
+        const {searchResult, isAuthenticated, dispatch} = this.props
+        let elements = JSON.parse(searchResult).reverse()
         return <div>{elements.map(element => {
             return (<RepoElement onEditClick={() => {dispatch(updateElemPreview(element))}} onRemoveClick={() => {dispatch(removeElem(element))}} elem={element} isAuthenticated={isAuthenticated}/>)
         })
@@ -24,18 +24,18 @@ class RepoList extends Component {
 
 }
 RepoList.propTypes = {
-    elems: PropTypes.string.isRequired,
+    searchResult: PropTypes.string.isRequired,
     isAuthenticated: PropTypes.bool.isRequired
 }
 
 function mapStateToProps(state){
     const {auth, repoApiCall} = state
     const {isAuthenticated} = auth
-    const {elems} = repoApiCall
+    const {searchResult} = repoApiCall
 
     return {
         isAuthenticated,
-        elems
+        searchResult
     }
 }
 

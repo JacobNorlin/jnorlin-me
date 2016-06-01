@@ -9,9 +9,7 @@ class NewRepoElem extends Component {
     render() {
         const {isAuthenticated, elem} = this.props
         const {id, link, title, summary, tags} = elem
-        const tagString = JSON.parse(tags).reduce((prev, curr) => {
-            return prev + " " + curr
-        }, "")
+        const tagString = tags
         return isAuthenticated && (
             <Grid>
                 <Col sm={8}>
@@ -56,7 +54,7 @@ class NewRepoElem extends Component {
         const summary = this.refs.summary.value.trim()
         const title = this.refs.title.value.trim()
         const link = this.refs.link.value.trim()
-        const tags = JSON.stringify(this.refs.tags.value.trim().split(" "))
+        const tags = this.refs.tags.value
 
         const {dispatch} = this.props
         dispatch(updateElemPreview({tags, link, title, summary}))
@@ -69,7 +67,7 @@ class NewRepoElem extends Component {
 
     componentWillUnmount() {
         const {dispatch} = this.props
-        dispatch(updateElemPreview({summary: "", title:"", link:"", type:"", id:-1 }))
+        dispatch(updateElemPreview({summary: "", title:"", link:"", type:"", id:-1, tags:"" }))
     }
 
 

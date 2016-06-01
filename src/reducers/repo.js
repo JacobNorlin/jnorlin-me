@@ -7,11 +7,11 @@ export default function repoApiCall(state = {
     elem: {
         summary: " ",
         link: " ",
-        tags: "[]",
+        tags: "",
         title: " ",
         id: -1
     },
-    elems: "[]"
+    searchResult: "[]"
 }, action) {
     switch (action.type) {
         case API_REQUEST:
@@ -33,7 +33,7 @@ export default function repoApiCall(state = {
         {
             return Object.assign({}, state, {
                 isFetching: false,
-                elems: action.response
+                searchResult: action.response
             })
         }
 

@@ -7,12 +7,13 @@ export const API_REQUEST_REMOVEELEM_SUCCESS = 'API_REQUEST_REMOVEELEM'
 export const API_REQUEST_FAILURE = 'API_REQUEST_FAILURE'
 export const API_REQUEST = 'API_REQUEST'
 
-export function fetchElems(user){
+export function searchRepo(query){
     return {
         [CALL_API]: {
-            endpoint: 'repo/'+user.username,
+            endpoint: 'repo/search',
+            data: query,
             types: [API_REQUEST, API_REQUEST_FETCHELEMS_SUCCESS, API_REQUEST_FAILURE],
-            type: 'GET'
+            method: 'GET'
         }
     }
 }

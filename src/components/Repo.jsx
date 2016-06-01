@@ -3,18 +3,27 @@ import {Component, PropTypes} from 'react'
 import {Grid, Row, Col, Navbar, Nav, NavItem, PageHeader} from 'react-bootstrap';
 import RepoList from './RepoList.jsx';
 import {connect} from 'react-redux'
-import {fetchElems, removeElem, addElem, updateElemPreview} from '../actions/repo.js'
+import {searchRepo, removeElem, addElem, updateElemPreview} from '../actions/repo.js'
 
 class Repo extends Component {
 
-    componentWillMount() {
-        const {dispatch} = this.props
-
-        dispatch(fetchElems({username: 'test'}))
+    fetchElems() {
+        const {dispatch, user} = this.props
+        const {tags=""} = this.props.location.query
+        dispatch(searchRepo({username:user.username, id: user.id, tags}))
     }
 
+    componentWillMount() {
+        this.fetchElems()
+    }
+
+    componentDidUpdate(){
+        this.fetchElems()
+    }
+
+
     render() {
-        const {elems, isAuthenticated, dispatch} = this.props
+        const {isAuthenticated} = this.props
         console.log(this.props)
         return <Grid>
             <Row>
@@ -52,11 +61,11 @@ Repo.propTypes = {
 }
 
 function mapStateToProps(state) {
-    console.log(state)
     const {auth} = state
-    const {isAuthenticated} = auth
+    const {isAuthenticated, user} = auth
     return {
-        isAuthenticated
+        isAuthenticated,
+        user
     }
 }
 

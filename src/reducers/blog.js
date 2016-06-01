@@ -4,7 +4,7 @@ import {BLOG_SEARCH_FAILURE, BLOG_SEARCH_REQUEST, BLOG_SEARCH_SUCCESS, BLOG_POST
 
 
 export function blogApiCall(state = {
-    isFetching: false,
+    isSearching: false,
     isPosting: false,
     authenticated: true,
     post: {
@@ -13,7 +13,8 @@ export function blogApiCall(state = {
         title: "",
         tags: ""
     },
-    searchResult: "[]"
+    searchResult: "[]",
+    searchError: false
 }, action) {
     switch (action.type) {
         case BLOG_POST_REQUEST:
@@ -66,7 +67,7 @@ export function blogApiCall(state = {
         {
             return Object.assign({}, state, {
                 isSearching: false,
-                searchError: action.response
+                searchError: true
             })
         }
 
