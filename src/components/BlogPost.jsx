@@ -16,7 +16,7 @@ export default class BlogPost extends Component {
                         <a href={"#/blog/?postId="+id}>{title}</a>
                     </PageHeader>
                     <small className="subHeader">
-                        posted: {this.formatDate(new Date(createdAt))}  updated: {this.formatDate(new Date(updatedAt)  )}
+                        Last changed: {this.formatDate(updatedAt)}
                     </small><br/>
                     <small>
                         {
@@ -36,7 +36,13 @@ export default class BlogPost extends Component {
         </Grid>)
     }
 
-    formatDate(date) {
+    formatDate(dateString) {
+        let date
+        if(dateString){
+            date = new Date(dateString)
+        }else{
+            date = new Date()
+        }
         return date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate()
     }
 }
