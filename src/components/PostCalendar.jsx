@@ -43,8 +43,8 @@ export default class PostCalendar extends Component {
 
         const constructDates = (posts) => {
             const calendar = posts.reduce((acc, p) => {
-                const m = month(p.createdAt)
-                const y = year(p.createdAt)
+                const m = month(p.updatedAt)
+                const y = year(p.updatedAt)
                 acc[y] === undefined ? acc[y] = {} : acc
                 acc[y][m] === undefined ? (acc[y][m] = [p]) : acc[y][m].push(p)
                 return acc

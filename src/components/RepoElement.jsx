@@ -2,6 +2,7 @@
 import {Component, PropTypes} from 'react';
 import {Col} from 'react-bootstrap'
 import Tag from './Tag.jsx'
+import {Panel, Glyphicon} from 'react-bootstrap'
 
 export default class RepoElement extends Component {
     render() {
@@ -24,10 +25,12 @@ export default class RepoElement extends Component {
             </div>)}
             <div className="elemContainer">
                 <h4 className="subHeader">Summary</h4>
-                <p>{summary}</p>
+                <Panel>{summary}</Panel>
+
             </div>
         </Col>
     }
+
 
     formatLink(link){
         if (link.substring(0, 7) !== "http://")

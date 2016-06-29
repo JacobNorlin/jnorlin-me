@@ -75,6 +75,7 @@ class NewBlogPost extends Component {
         const summary = this.refs.blogpost.value.trim()
         const tags = this.refs.tags.value
         const title = this.refs.title.value.trim()
+        const body = this.refs.blogpost.value.trim()
         const {dispatch, post} = this.props
         dispatch(updateBlogPreviewContent({body, tags, title, id: post.id}))
 
